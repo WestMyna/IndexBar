@@ -8,10 +8,8 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import androidx.core.content.res.getTextArrayOrThrow
 import io.github.library.Utils.dip2px
 import io.github.library.Utils.sp2px
 
@@ -54,7 +52,6 @@ class IndexBar : View {
     private var mIndexListener: IndexListener? = null
 
     companion object {
-        private const val TAG = "IndexBar"
         private const val DEFAULT_INDEX_TEXT_SIZE = 10f//默认字体大小
         private const val DEFAULT_INDEX_TEXT_COLOR = Color.WHITE//默认字体颜色
         private const val DEFAULT_INDEX_SELECTED_BG_COLOR = Color.GREEN//默认选中背景颜色
@@ -145,6 +142,11 @@ class IndexBar : View {
         invalidate()
     }
 
+    /**
+     * 设置选中索引背景颜色
+     *
+     * @param selectedBgColor
+     */
     fun setSelectedBgColor(selectedBgColor: Int) {
         mIndexSelectedBgColor = selectedBgColor
         mIndexSelectedBgPaint.color = mIndexSelectedBgColor
@@ -236,19 +238,16 @@ class IndexBar : View {
             }
             val baseline = centerY + (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom
             canvas.drawText(text, pointF.x, baseline, mIndexTextPaint)
-            Log.d(TAG, "DRAW:${mIndexTextPaint.textSize}")
         }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
-                Log.d(TAG, "x:${event.x}--y:${event.y}")
                 mSelectedIndexEntity = findIndexByEventY(event.x, event.y)
                 if (mSelectedIndexEntity == null) {
-                    Log.d(TAG, "没有匹配到")
+
                 } else {
-                    Log.d(TAG, "IndexEntity:${mSelectedIndexEntity?.text}")
                     mIndexListener?.onIndexSelected(mSelectedIndexEntity!!.text)
                 }
                 invalidate()
