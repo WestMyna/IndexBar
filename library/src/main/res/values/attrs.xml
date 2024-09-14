@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="IndexBar">
+        <!--        索引文字大小-->
+        <attr name="text_size" format="dimension" />
+        <!--        索引文字颜色-->
+        <attr name="text_color" format="color" />
+        <!--        索引数组-->
+        <attr name="index_array" format="string" />
+        <!--        索引文字上下间距-->
+        <attr name="text_padding" format="dimension" />
+        <!--        索引选中背景颜色-->
+        <attr name="selected_bg_color" format="color" />
+    </declare-styleable>
+</resources>
